@@ -1,0 +1,23 @@
+#!/bin/sh
+
+if [ ! -f /teamspeak/ts3server.sqlitedb ] && [ -f /data/ts3server.sqlitedb ]
+then
+   ln -s /data/ts3server.sqlitedb /teamspeak/ts3server.sqlitedb
+fi
+
+if [ -f /teamspeak/ts3server.sqlitedb ] && [ ! -f /data/ts3server.sqlitedb ]
+then
+   mv /teamspeak/ts3server.sqlitedb /data/ts3server.sqlitedb
+   ln -s /data/ts3server.sqlitedb /teamspeak/ts3server.sqlitedb
+fi
+
+if [ -f /teamspeak/ts3server.sqlitedb ] && [ -f /data/ts3server.sqlitedb ]
+then
+   rm /teamspeak/ts3server.sqlitedb
+   ln -s /data/ts3server.sqlitedb /teamspeak/ts3server.sqlitedb
+fi
+
+export LD_LIBRARY_PATH="/teamspeak:$LD_LIBRARY_PATH"
+cd /teamspeak
+
+exec ./ts3server_linux_amd64 $@
