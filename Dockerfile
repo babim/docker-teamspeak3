@@ -1,6 +1,6 @@
 FROM babim/debianbase
 
-ENV TS3_VERSION 3.0.13.4
+ENV TS3_VERSION 3.2.0
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update && apt-get install lbzip2 -y && apt-get autoremove --purge && apt-get autoclean && apt-get clean
